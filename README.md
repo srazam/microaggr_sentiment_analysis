@@ -1,7 +1,7 @@
 # Sentiment Analysis of YouTube Comments under Minority-Lead Superhero Films
 
 ## What is the REU Program?
-The REU (Research Experience for Undergraduates) Program 
+The REU (Research Experience for Undergraduates) Program is a program that is funded by the National Science Foundation (NSF) and allows undergraduate students the opportunity to work with faculty/staff who are in the computer science/software engineering departments. These faculty/staff members are meant to be mentors and are meant to guide students with their research. 
 
 ## My Project
 Using YouTube's API, I will be randomly selecting comments from minority-lead superhero films to see if the minority-status of the lead-character affects the comments said under the trailers on YouTube. The purpose of this research is to show YouTube that it is possible to be watchful of hateful/biggoted content on their platform and therefore be able to prevent this kind of content to be spread on there. Additionally, I hope to show the importance of having representation in media.
