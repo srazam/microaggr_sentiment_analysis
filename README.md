@@ -1,1 +1,19 @@
 # Sentiment Analysis of YouTube Comments under Minority-Lead Superhero Films
+
+## What is the REU Program?
+The REU (Research Experience for Undergraduates) Program 
+
+## My Project
+Using YouTube's API, I will be randomly selecting comments from minority-lead superhero films to see if the minority-status of the lead-character affects the comments said under the trailers on YouTube. The purpose of this research is to show YouTube that it is possible to be watchful of hateful/biggoted content on their platform and therefore be able to prevent this kind of content to be spread on there. Additionally, I hope to show the importance of having representation in media.
+
+Using python and YouTube's API, I will randomly extract comments from minority-lead superhero film trailers from YouTube and analyze biggotted comments within them. I will only be looking at movie trailers/movies that were released in the 21st century. These are the trailers that I will be pulling from: 
+
+#### Minority-Lead Superhero films 
+* Spider-Man: Into the Spiderverse
+* Captain Marvel
+* Ms. Marvel
+* Black Panther
+* Black Panther: Wakanda Forever
+* Shang-Chi and the Legend of the Ten Rings
+* Black Adam
+* The Falcon and the Winter Soldier 
