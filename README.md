@@ -8,7 +8,7 @@ Using YouTube's API, I will be randomly selecting comments from minority-lead su
 
 Using python and YouTube's API, I will randomly extract comments from minority-lead superhero film trailers from YouTube and analyze biggotted comments within them. I will only be looking at movie trailers/movies that were released in the 21st century. These are the trailers that I will be pulling from: 
 
-#### Minority-Lead Superhero films 
+#### Minority-Lead Superhero Films/Tv Shows
 * Spider-Man: Into the Spiderverse
 * Captain Marvel
 * Ms. Marvel
@@ -17,3 +17,17 @@ Using python and YouTube's API, I will randomly extract comments from minority-l
 * Shang-Chi and the Legend of the Ten Rings
 * Black Adam
 * The Falcon and the Winter Soldier 
+
+#### Non-Minority Lead Films/TV Shows
+* Thor
+* Captain America
+* Iron Man
+* Loki
+
+#### Team-Lead Films
+* Guardians of the Galaxy Films
+* Peacemaker 
+* Suicide Squad (by James Gunn)
+
+## Purpose of this GitHub Repository
+The purpose of this GitHub repository is to show how I randomized/got the comments from the trailers as well as which trailers I wanted. Additionally, it is to show the processes/methods in which I used to perform sentiment analysis as well as I how I categorized the comments. 
