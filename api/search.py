@@ -4,7 +4,7 @@ from googleapiclient.discovery import build
 #"pretty print"; gives it the nice format once program is ran 
 from pprint import pprint
 
-CHANNEL_ID = "UCLj_i7yL-8FZrdQA6eE4iqQ"
+CHANNEL_ID = "UCvC4D8onUfXzvjTOM-dBfEA"
 
 # Creating an object of the instance of the API
 def get_youtube():
@@ -20,7 +20,7 @@ youtube = get_youtube()
 request = youtube.search().list(
     part="snippet",
     type = "video",
-    channelId="UCLj_i7yL-8FZrdQA6eE4iqQ",
+    channelId="UCvC4D8onUfXzvjTOM-dBfEA",
     maxResults = 50
 )
 response = request.execute()
@@ -40,4 +40,4 @@ for item in response['items'][:1]:
         author = comment["snippet"]["authorDisplayName"]
         comment_text = comment["snippet"]["textDisplay"]
 
-        print(author + " - " + comment_text)
+        print(author + " - " + comment_text + " - " + videoId)
