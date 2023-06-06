@@ -16,7 +16,6 @@ Using python and YouTube's API, I will randomly extract comments from minority-l
 * Black Panther: Wakanda Forever
 * Shang-Chi and the Legend of the Ten Rings
 * Black Adam
-* The Falcon and the Winter Soldier 
 
 #### Non-Minority Lead Films/TV Shows
 * Thor
