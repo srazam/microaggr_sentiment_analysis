@@ -6,7 +6,7 @@
 
 import os
 
-import googleapiclient.discovery
+from googleapiclient.discovery import build
 
 def main():
     # Disable OAuthlib's HTTPS verification when running locally.
