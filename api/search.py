@@ -1,3 +1,5 @@
+#For getting comments from a specific YouTube channel
+
 from googleapiclient.discovery import build
 #"pretty print"; gives it the nice format once program is ran 
 from pprint import pprint
@@ -38,4 +40,4 @@ for item in response['items'][:1]:
         author = comment["snippet"]["authorDisplayName"]
         comment_text = comment["snippet"]["textDisplay"]
 
-        print(author, comment_text)
+        print(author + " - " + comment_text)
