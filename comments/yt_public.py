@@ -8,6 +8,7 @@ import os
 
 from googleapiclient.discovery import build
 
+API_KEY = os.getenv("API_KEY")
 DEVELOPER_KEY = "AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU"
 
 youtube = build(
@@ -16,14 +17,13 @@ youtube = build(
 def comment_threads(channelID, to_csv = False):
     request = youtube.commentThreads().list(
         part="id.replies, snippet",
-        videoId = channelID,
-        maxResults = 5
+        videoId = channelID
     )
     response = request.execute()
     print(response)
 
 def main():
-    comment_threads('UCykOzZdQ5wLKvaAcD1Um5xQ')
+    comment_threads('Qo8dXyKXyME')
     
 
 if __name__ == "__main__":
