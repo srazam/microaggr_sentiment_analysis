@@ -8,25 +8,23 @@ import os
 
 from googleapiclient.discovery import build
 
-def main():
-    # Disable OAuthlib's HTTPS verification when running locally.
-    # *DO NOT* leave this option enabled in production.
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+DEVELOPER_KEY = "AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU"
 
-    api_service_name = "youtube"
-    api_version = "v3"
-    DEVELOPER_KEY = "AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU"
+youtube = build(
+    "youtube", "v3", developerKey = DEVELOPER_KEY)
 
-    youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, developerKey = DEVELOPER_KEY)
-
+def comment_threads(channelID, to_csv = False):
     request = youtube.commentThreads().list(
-        part="id.snippet",
-        videoId="m9EX0f6V11Y"
+        part="id.replies, snippet",
+        videoId = channelID,
+        maxResults = 5
     )
     response = request.execute()
-
     print(response)
+
+def main():
+    comment_threads('UCykOzZdQ5wLKvaAcD1Um5xQ')
+    
 
 if __name__ == "__main__":
     main()
