@@ -5,13 +5,12 @@
 # https://developers.google.com/explorer-help/code-samples#python
 
 import os
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 from googleapiclient.discovery import build
 
-#load_dotenv()
-#API_KEY = os.getenv("API_KEY")
-API_KEY = "AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU"
+load_dotenv()
+API_KEY = os.getenv("API_KEY")
 
 youtube = build(
     "youtube", "v3", developerKey = API_KEY)
@@ -19,7 +18,8 @@ youtube = build(
 def comment_threads(channelID, to_csv = False):
     request = youtube.commentThreads().list(
         part="id.replies, snippet",
-        videoId = channelID
+        videoId = channelID, 
+        maxResults = 1000
     )
     response = request.execute()
     print(response)
