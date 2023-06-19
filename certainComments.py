@@ -24,9 +24,21 @@ def get_video_comments(api_key, video_id, max_results):
                 'author': comment['authorDisplayName'],
                 'text': comment['textDisplay'],
                 'published_at': comment['publishedAt'],
-                'comment_id': item['id'],
-                'parent_id': item['snippet']['parentId']
+                'comment_id': item['snippet']['topLevelComment']['id'],
+                'parent_id': None  # Set parent_id as None for top-level comments
             })
+
+            # Check if there are any replies to the comment
+            if 'replies' in item.keys():
+                for reply in item['replies']['comments']:
+                    comments.append({
+                        'video_id': video_id,
+                        'author': reply['snippet']['authorDisplayName'],
+                        'text': reply['snippet']['textDisplay'],
+                        'published_at': reply['snippet']['publishedAt'],
+                        'comment_id': reply['id'],
+                        'parent_id': item['snippet']['topLevelComment']['id']
+                    })
 
         return comments
 
@@ -45,8 +57,8 @@ def save_comments_to_csv(comments, filename):
 
 # Set your API key, video ID, and maximum number of comments to retrieve
 api_key = 'AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU'
-video_id = 'wUn05hdkhjM'
-max_results = 18
+video_id = '6ZfuNTqbHE8'
+max_results = 455
 
 # Retrieve the comments
 comments = get_video_comments(api_key, video_id, max_results)
