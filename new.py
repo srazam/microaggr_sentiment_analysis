@@ -8,8 +8,8 @@ YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
 # Set the video ID and the number of comments to retrieve
-VIDEO_ID = "6ZfuNTqbHE8"
-MAX_RESULTS = 4560
+VIDEO_ID = "wUn05hdkhjM"
+MAX_RESULTS = 1000
 
 # Create a CSV file and write header
 csv_file = open("comments.csv", "w", newline="", encoding="utf-8")
