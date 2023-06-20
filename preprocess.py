@@ -1,5 +1,6 @@
 import csv
 import re
+from nltk.tokenize import word_tokenize
 
 #The original file
 input_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2.csv'
@@ -7,8 +8,15 @@ input_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2.csv'
 output_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2_clean.csv'
 
 #Is on a zero-based index
-column_index_parent = 6 #Column of the parent Ids (not needed becasue are just replies)
+column_index_parent = 6 #Column of the parent Ids 
 column_index_text = 2 #Column of the original text 
+
+#Removing time stamps
+def remove_time_stamps(comment):
+    #Time stamp pattern - m:ss
+    pattern = r'\b\d{1}:\d{1,2}\b'
+    cleaned_comment = re.sub(pattern, '', comment)
+    return cleaned_comment
 
 #Removing punctuation marks
 def remove_punctuation(comment):
@@ -18,15 +26,8 @@ def remove_punctuation(comment):
     cleaned_comment = re.sub(pattern, '', comment)
     return cleaned_comment
 
-#Removing time stamps
-def remove_time_stamps(comment):
-    #Time stamp pattern - m:ss
-    pattern = r'\b\s?\d{1}:\d{2}\b'
-    cleaned_comment = re.sub(pattern, '', comment)
-    return cleaned_comment
-
 #Use to remove emojis from the text - emojis are reprsented by specific Unicode ranges so are being matched and then removed 
-def remove_emojis(text):
+def remove_emojis(comment):
     emoji_pattern = re.compile("["
                                u"\U0001F600-\U0001F64F"  # emoticons
                                u"\U0001F300-\U0001F5FF"  # symbols & pictographs
@@ -47,21 +48,21 @@ def remove_emojis(text):
                                u"\ufe0f"  # dingbats
                                u"\u3030"
                                "]+", flags=re.UNICODE)
-    cleaned_text = re.sub(emoji_pattern, '', text)
-    return cleaned_text
+    cleaned_comment = re.sub(emoji_pattern, '', comment)
+    return cleaned_comment
 
 with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csvfile, open(output_file, 'w', newline='', encoding='utf-8', errors='ignore') as outfile:
     reader = csv.reader(csvfile)
     writer = csv.writer(outfile)
 
     #Taking the first row (the names of each column) and writing it to the new csv file
-    column_names = next(reader)
+    column_names = next(reader) + ['tokenizations']
     writer.writerow(column_names)
 
     #Iterate through each row
     for row in reader:
-        cleaned_cell = remove_time_stamps(row[column_index_text]) #Removing timestamps
         cleaned_cell = remove_emojis(row[column_index_text]) #Removing emojis
+        cleaned_cell = remove_time_stamps(row[column_index_text]) #Removing timestamps
         cleaned_cell = remove_punctuation(row[column_index_text]) # Removing punctuation marks
 
         row[column_index_text] = cleaned_cell
@@ -69,6 +70,9 @@ with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csv
         #Make all text lowercase
         row[column_index_text] = row[column_index_text].lower()
         
-        #Removing comments that are replies by seeing if they have info in the "parent id" column
-        if not row[column_index_parent] or not row[column_index_text] == "hi":
-            writer.writerow(row)
+        #Removing comments that are replies, blank, or just say "hi"
+        if not row[column_index_parent] and not row[column_index_text] == "hi" and not row[column_index_text] == "":
+            tokens = word_tokenize(row[column_index_text])
+            token_list = []
+            token_list.extend(tokens)
+            writer.writerow(row + token_list) 
