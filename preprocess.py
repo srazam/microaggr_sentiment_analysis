@@ -11,13 +11,6 @@ output_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2_clean.csv'
 column_index_parent = 6 #Column of the parent Ids 
 column_index_text = 2 #Column of the original text 
 
-#Removing time stamps
-def remove_time_stamps(comment):
-    #Time stamp pattern - m:ss
-    pattern = r'\b\d{1}:\d{1,2}\b'
-    cleaned_comment = re.sub(pattern, '', comment)
-    return cleaned_comment
-
 #Removing punctuation marks
 def remove_punctuation(comment):
     #Pattern for removing punctuation mark
@@ -58,12 +51,13 @@ with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csv
 
     #Taking the first row (the names of each column) and writing it to the new csv file
     column_names = next(reader) + ['tokenizations']
+    column_names[column_index_text] = 'cleanedData'
     writer.writerow(column_names)
 
     #Iterate through each row
     for row in reader:
+        cleaned_cell = row[column_index_text].replace("?:??", "") #Remove timestamps
         cleaned_cell = remove_emojis(row[column_index_text]) #Removing emojis
-        cleaned_cell = remove_time_stamps(row[column_index_text]) #Removing timestamps
         cleaned_cell = remove_punctuation(row[column_index_text]) # Removing punctuation marks
 
         row[column_index_text] = cleaned_cell
