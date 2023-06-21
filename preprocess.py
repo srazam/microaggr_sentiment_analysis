@@ -26,6 +26,7 @@ def remove_punctuation(comment):
     cleaned_comment = re.sub(pattern, '', comment)
     return cleaned_comment
 
+
 #Use to remove emojis from the text - emojis are reprsented by specific Unicode ranges so are being matched and then removed 
 def remove_emojis(comment):
     emoji_pattern = re.compile("["
@@ -69,7 +70,7 @@ with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csv
 
         #Make all text lowercase
         row[column_index_text] = row[column_index_text].lower()
-        
+
         #Removing comments that are replies, blank, or just say "hi"
         if not row[column_index_parent] and not row[column_index_text] == "hi" and not row[column_index_text] == "":
             tokens = word_tokenize(row[column_index_text])
