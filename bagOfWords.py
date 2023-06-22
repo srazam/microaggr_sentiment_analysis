@@ -1,38 +1,18 @@
-import csv
-import nltk
-import re
-import numpy as np
-import heapq
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
 
+input_file = r'C:\Users\AzamF\Documents\GitHub\reuData\GOTGV2_clean.csv'
+output_file = r'C:\Users\AzamF\Documents\GitHub\reuData\GOTGV2_bow.csv'
 
-input_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2_clean.csv'
-output_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2_bow.csv'
-column_index_text = 2 #Column of the clean text 
+data = pd.read_csv(input_file, encoding='utf-8')
 
-with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csvfile, open(output_file, 'w', newline='', encoding='utf-8', errors='ignore') as outfile:
-    reader = csv.reader(csvfile)
-    writer = csv.writer(outfile)
+text_column = data['cleanedData']
 
-    #Creat bag of words model
-    word2count = {}
+vectorizer = CountVectorizer()
+bag_of_words = vectorizer.fit_transform(text_column)
 
-    for row in reader:
-        words = nltk.word_tokenize(row[column_index_text])
-        for word in words:
-            if word not in word2count.keys():
-                word2count[word] = 1
-            else:
-                word2count[word] += 1
+bag_of_words_array = bag_of_words.toarray()
+print(bag_of_words_array)
 
-    freq_words = heapq.nlargest(100, word2count, key=word2count.get)
-
-    X = []
-    for row in reader:
-        vector = []
-        for word in freq_words:
-            if word in nltk.word_tokenize(row[column_index_text]):
-                vector.append(1)
-            else:
-                vector.append(0)
-            X.append(vector)
-        X = np.asarray(X)
+bag_of_words_df = pd.DataFrame(bag_of_words.toarray(), columns=vectorizer.get_feature_names_out())
+bag_of_words_df.to_csv(output_file, index=False, encoding='utf-8')
