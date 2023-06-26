@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 api_key = 'AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU'
 
 # Replace 'VIDEO_ID' with the ID of the YouTube video you want to extract comments from
-video_id = 'WHXq62VCaCM'
+video_id = 'AIc671o9yCI'
 
 # Create a YouTube API client
 youtube = build('youtube', 'v3', developerKey=api_key)
