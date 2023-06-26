@@ -1,75 +1,83 @@
 import csv
-import os
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
-# Set your YouTube API key
-API_KEY = 'AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU'
+# Replace 'YOUR_API_KEY' with your actual API Key
+api_key = 'AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU'
 
-# Set the video ID for which you want to extract comments
-VIDEO_ID = '6ZfuNTqbHE8'
+# Replace 'VIDEO_ID' with the ID of the YouTube video you want to extract comments from
+video_id = 'WHXq62VCaCM'
 
-# Set the maximum number of comments to retrieve
-MAX_RESULTS = 1000
+# Create a YouTube API client
+youtube = build('youtube', 'v3', developerKey=api_key)
 
-# Set the desired column names for the CSV file
-FIELD_NAMES = ['video_id', 'comment_text', 'likes', 'published_at', 'updated_at', 'comment_id']
+# Retrieve the first page of comments
+response = youtube.commentThreads().list(
+    part='snippet',
+    videoId=video_id,
+    maxResults=100,
+    order='time'
+).execute()
 
-def retrieve_comments(api_key, video_id, max_results):
-    try:
-        # Build the YouTube API service
-        youtube = build('youtube', 'v3', developerKey=api_key)
+# Process the first page of comments
+comments = []
+for item in response['items']:
+    comment = item['snippet']['topLevelComment']['snippet']
+    comment_data = {
+        'video_id': comment['videoId'],
+        'comment_id': item['id'],
+        'published_at': comment['publishedAt'],
+        'updated_at': comment['updatedAt'],
+        'likes': comment['likeCount'],
+        'text': comment['textOriginal']
+    }
+    comments.append(comment_data)
 
-        # Call the API to retrieve the video comments
-        response = youtube.commentThreads().list(
-            part='snippet',
-            videoId=video_id,
-            maxResults=max_results
-        ).execute()
+# Check if there are more comments
+while 'nextPageToken' in response:
+    next_page_token = response['nextPageToken']
+    response = youtube.commentThreads().list(
+        part='snippet',
+        videoId=video_id,
+        maxResults=100,
+        order='time',
+        pageToken=next_page_token
+    ).execute()
 
-        # Process the comments and return the relevant information
-        comments = []
-        while response:
-            for item in response['items']:
-                comment = item['snippet']['topLevelComment']['snippet']
-                comment_info = {
-                    'video_id': video_id,
-                    'comment_text': comment['textDisplay'],
-                    'likes': comment['likeCount'],
-                    'published_at': comment['publishedAt'],
-                    'updated_at': comment['updatedAt'],
-                    'comment_id': item['snippet']['topLevelComment']['id']
-                }
-                comments.append(comment_info)
+    # Process the next page of comments
+    for item in response['items']:
+        comment = item['snippet']['topLevelComment']['snippet']
+        comment_data = {
+            'video_id': comment['videoId'],
+            'comment_id': item['id'],
+            'published_at': comment['publishedAt'],
+            'updated_at': comment['updatedAt'],
+            'likes': comment['likeCount'],
+            'text': comment['textOriginal']
+        }
+        comments.append(comment_data)
 
-            #Check if there are more comments to retrieve
-            if 'nextPageToken' in response:
-                next_page_token = response['nextPageToken']
-                response = youtube.commentThreads().list(
-                    part='snippet',
-                    videoId=video_id,
-                    maxResults=max_results, 
-                    pageToken=next_page_token
-                ).execute()
-            else:
-                break
+        # Exit the loop if we have reached the desired number of comments
+        if len(comments) >= 200:
+            break
 
-        return comments
+    # Exit the loop if we have reached the desired number of comments
+    if len(comments) >= 200:
+        break
 
-    except HttpError as e:
-        print(f'An HTTP error {e.resp.status} occurred: {e.content}')
+# Write the comments to a CSV file
+filename = 'youtube_comments.csv'
 
-def write_to_csv(comments):
-    file_exists = os.path.isfile('youtube_comments.csv')
+with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+    fieldnames = ['Video ID', 'Comment ID', 'Published At', 'Updated At', 'Likes', 'Comment Text']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    with open('youtube_comments.csv', 'a', newline='', encoding='utf-8') as file:
-        writer = csv.DictWriter(file, fieldnames=FIELD_NAMES)
-
-        if not file_exists:
-            writer.writeheader()
-
-        writer.writerows(comments)
-
-# Retrieve and store the comments
-comments = retrieve_comments(API_KEY, VIDEO_ID, MAX_RESULTS)
-write_to_csv(comments)
+    writer.writeheader()
+    for comment in comments:
+        writer.writerow({
+            'Video ID': comment['video_id'],
+            'Comment ID': comment['comment_id'],
+            'Published At': comment['published_at'],
+            'Updated At': comment['updated_at'],
+            'Likes': comment['likes'],
+            'Comment Text': comment['text']
+        })

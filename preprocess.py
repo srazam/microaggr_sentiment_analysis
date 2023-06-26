@@ -50,7 +50,7 @@ with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csv
     writer = csv.writer(outfile)
 
     #Taking the first row (the names of each column) and writing it to the new csv file
-    column_names = next(reader) #+ ['tokenizations']
+    column_names = next(reader) 
     column_names[column_index_text] = 'cleanedData'
     writer.writerow(column_names)
 
@@ -67,7 +67,4 @@ with open(input_file, 'r', newline='', encoding='utf-8', errors='ignore') as csv
 
         #Removing comments that are replies, blank, or just say "hi"
         if not row[column_index_parent] and not row[column_index_text] == "hi" and not row[column_index_text] == "":
-            #tokens = word_tokenize(row[column_index_text])
-            #token_list = []
-            #token_list.extend(tokens)
-            writer.writerow(row) #+ token_list
+            writer.writerow(row) 
