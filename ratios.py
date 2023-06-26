@@ -1,3 +1,5 @@
+#Use for calculating the views to like ratio
+
 import pandas as pd
 
 #Read csv file into a pandas DataFrame
