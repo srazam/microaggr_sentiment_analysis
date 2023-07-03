@@ -1,11 +1,10 @@
 import csv
 import re
-#from nltk.tokenize import word_tokenize
 
 #The original file
-input_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2.csv'
+input_file = r'C:\Users\AzamF\Desktop\trailerData\AntMan_6-27.csv'
 #The cleaned file
-output_file = 'C:/Users/AzamF/Documents/GitHub/reuData/GOTGV2_clean.csv'
+output_file = r'C:\Users\AzamF\Documents\GitHub\reuData\cleanedData\AntMan_cleaned.csv'
 
 #Is on a zero-based index
 column_index_parent = 6 #Column of the parent Ids 
