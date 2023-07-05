@@ -1,5 +1,5 @@
-from transformers import pipeline
-import pandas as pd
+from transformers import pipeline #Used for applying pre-trained model without tokenizing text
+import pandas as pd 
 
 model_name = "Hate-speech-CNERG/dehatebert-mono-english"
 nlp = pipeline("text-classification", model=model_name)
@@ -12,6 +12,7 @@ max_sequence_length = 512
 df = pd.read_csv(input_file)
 texts = df["Comment Text"]  
 
+#Truncate the text sequences to the maximum length
 truncated_texts = [text[:max_sequence_length] for text in texts]
 results = nlp(truncated_texts)
 
