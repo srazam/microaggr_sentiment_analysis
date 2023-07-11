@@ -27,8 +27,14 @@ for input in inputs:
             #Compare the values from the two different columns
             if bertLabel == trueLabel:
                 minorityCorrect += 1
+                totalComments += 1
 
-inputs = [r'nonminoritylead.csv'
+inputs = [r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_AntMan - labeled_AntMan.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_Aquaman - labeled_Aquaman.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_CAWinterSoldier - labeled_CAWinterSoldier.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_DoctorStrange - labeled_DoctorStrange.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_Pennyworth - labeled_Pennyworth.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_SHAZAM - labeled_SHAZAM.csv'
           ]
 
 #Caluclate the number of comments that were labeled correctly for nonminority-led media
@@ -45,17 +51,18 @@ for input in inputs:
             #Compare the values from the two different columns
             if bertLabel == trueLabel:
                 nonMinorityCorrect += 1
+                totalComments += 1
 
 #Creating the bar chart
 categories = ['Comments from Minority-Led Media Correctly Labeled', 'Comments from NonMinority-Led Media Correctly Labeled']
 counts = [minorityCorrect, nonMinorityCorrect]
 
-plt.figure(figsize=(8,6))
+plt.figure(figsize=(13,6))
 plt.barh(categories, counts)
 plt.xlabel('Count')
-plt.ylabel('Comments')
+plt.ylabel('Comment Type')
 
-plt.title("Number of Comments Correctly Labeled per Class (Out of )")
+plt.title("Number of Comments Correctly Labeled per Class (Out of " + str(totalComments) + ") Comments")
 
 plt.tight_layout()
 plt.show()

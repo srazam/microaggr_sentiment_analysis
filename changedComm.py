@@ -6,10 +6,15 @@ inputs = [r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_BlackPant
           r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_BlackAdam - labeled_BlackAdam.csv',
           r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_MsMarvel - labeled_MsMarvel.csv', 
           r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_ShangChi - labeled_ShangChi.csv',
-          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_WonderWoman - labeled_WonderWoman.csv'
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_WonderWoman - labeled_WonderWoman.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_AntMan - labeled_AntMan.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_Aquaman - labeled_Aquaman.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_CAWinterSoldier - labeled_CAWinterSoldier.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_DoctorStrange - labeled_DoctorStrange.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_Pennyworth - labeled_Pennyworth.csv',
+          r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_SHAZAM - labeled_SHAZAM.csv'
           ]
 
-correct = 0
 HtoNH = 0
 NHtoH = 0
 totalComments = 0
@@ -27,18 +32,16 @@ for input in inputs:
             trueLabel = row["True Label"]
 
             #Compare the values from the two different columns
-            if bertLabel == trueLabel:
-                correct += 1
-            elif bertLabel == "HATE" and trueLabel == "NON_HATE":
+            if bertLabel == "HATE" and trueLabel == "NON_HATE":
                 HtoNH += 1
+                totalComments += 1
             elif bertLabel == "NON_HATE" and trueLabel == "HATE":
                 NHtoH += 1
-
-            totalComments += 1
+                totalComments += 1
 
 #Creating the bar chart
-categories = ['Correctly Labeled', 'Incorrectly Labeled Hate', 'Incorrectly Labeled Non-Hate']
-counts = [correct, HtoNH, NHtoH]
+categories = ['Incorrectly Labeled Hate', 'Incorrectly Labeled Non-Hate']
+counts = [HtoNH, NHtoH]
 
 plt.figure(figsize=(8,6))
 plt.barh(categories, counts)
