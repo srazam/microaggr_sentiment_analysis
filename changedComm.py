@@ -31,24 +31,31 @@ for input in inputs:
             bertLabel = row["BERT Label"]
             trueLabel = row["True Label"]
 
+            if row.get("BERT Label") and row.get("True Label"):
+                totalComments += 1
+
             #Compare the values from the two different columns
             if bertLabel == "HATE" and trueLabel == "NON_HATE":
                 HtoNH += 1
-                totalComments += 1
             elif bertLabel == "NON_HATE" and trueLabel == "HATE":
                 NHtoH += 1
-                totalComments += 1
 
 #Creating the bar chart
 categories = ['Incorrectly Labeled Hate', 'Incorrectly Labeled Non-Hate']
 counts = [HtoNH, NHtoH]
 
-plt.figure(figsize=(8,6))
+plt.figure(figsize=(12,6))
 plt.barh(categories, counts)
-plt.xlabel('Count')
-plt.ylabel('How the Model Labeled the Comment')
 
-plt.title("How Well did the BERT Model Label " + str(totalComments) + " Comments")
+plt.xticks(range(0, NHtoH + 1, 5))
+
+plt.xlabel('Count')
+plt.ylabel('Label Type')
+
+plt.title("BERT Model's Accuracy with Labeling Hate Speech Comments")
+
+caption = 'Note: There is a total of ' + str(totalComments) + ' comments that the model labeled that we labeled'
+plt.text(0.5, -0.2, caption, ha='center', va='center', transform=plt.gca().transAxes)
 
 plt.tight_layout()
 plt.show()
