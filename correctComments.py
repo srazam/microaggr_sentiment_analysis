@@ -24,10 +24,12 @@ for input in inputs:
             bertLabel = row["BERT Label"]
             trueLabel = row["True Label"]
 
+            if row.get("BERT Label") and row.get("True Label"):
+                totalComments += 1
+
             #Compare the values from the two different columns
             if bertLabel == trueLabel:
                 minorityCorrect += 1
-                totalComments += 1
 
 inputs = [r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_AntMan - labeled_AntMan.csv',
           r'C:\Users\AzamF\Documents\GitHub\reuData\trueLabels\labeled_Aquaman - labeled_Aquaman.csv',
@@ -48,21 +50,29 @@ for input in inputs:
             bertLabel = row["BERT Label"]
             trueLabel = row["True Label"]
 
+            if row.get("BERT Label") and row.get("True Label"):
+                totalComments += 1
+
             #Compare the values from the two different columns
             if bertLabel == trueLabel:
                 nonMinorityCorrect += 1
-                totalComments += 1
 
 #Creating the bar chart
-categories = ['Comments from Minority-Led Media Correctly Labeled', 'Comments from NonMinority-Led Media Correctly Labeled']
+categories = ['Minority-Led Media', 'NonMinority-Led Media']
 counts = [minorityCorrect, nonMinorityCorrect]
 
 plt.figure(figsize=(13,6))
 plt.barh(categories, counts)
-plt.xlabel('Count')
-plt.ylabel('Comment Type')
 
-plt.title("Number of Comments Correctly Labeled per Class (Out of " + str(totalComments) + ") Comments")
+plt.xticks(range(0, nonMinorityCorrect + 1, 100))
+
+plt.xlabel('Count')
+plt.ylabel('Number of Comments Correctly Labeled for:')
+
+plt.title("Number of Comments Correctly Labeled per Class")
+
+caption = 'Note: There is a total of ' + str(totalComments) + ' comments that the model labeled that we labeled'
+plt.text(0.5, -0.2, caption, ha='center', va='center', transform=plt.gca().transAxes)
 
 plt.tight_layout()
 plt.show()
