@@ -60,16 +60,17 @@ for input in inputs:
 #Creating the bar chart
 categories = ['Minority-Led Media', 'NonMinority-Led Media']
 counts = [minorityCorrect, nonMinorityCorrect]
+colors = ['blue', 'orange']
 
 plt.figure(figsize=(13,6))
-plt.barh(categories, counts)
+plt.barh(categories, counts, color=colors)
 
 plt.xticks(range(0, nonMinorityCorrect + 1, 100))
 
 plt.xlabel('Count')
 plt.ylabel('Number of Comments Correctly Labeled for:')
 
-plt.title("Number of Comments Correctly Labeled per Class")
+plt.title("Number of Comments Correctly Labeled per Class Before Fine-tuning")
 
 caption = 'Note: There is a total of ' + str(totalComments) + ' comments that the model labeled that we labeled'
 plt.text(0.5, -0.2, caption, ha='center', va='center', transform=plt.gca().transAxes)
