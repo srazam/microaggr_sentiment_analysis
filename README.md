@@ -1,5 +1,5 @@
 # Detecting Microaggressions and Subtle Hate Speech in Social Media Data Using BERT 
-### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Films 
+### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Media Trailers 
 
 ## Acknowledgements and Notes
 This research is based upon work supported by the National Science Foundation under Grant No. 2050883 and was conducted during the NSF's 2023 Research Experience for Undergraduate (REU) program at East Carolina University, with a focus on Software Engineering and Data Science. The following information below was from the poster presented at the Summer 2023 Undergraduate Research Symposium at East Carolina University.
