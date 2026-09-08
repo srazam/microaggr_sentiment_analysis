@@ -1,8 +1,7 @@
 # Detecting Microaggressions and Subtle Hate Speech in Social Media Data Using BERT 
-### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Films
-### Presented at the Summer 2023 Undergraduate Research Symposium at East Carolina University
+### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Films - Presented at the Summer 2023 Undergraduate Research Symposium at East Carolina University
 
-## Acknowledgement 
+## Acknowledgements
 This research is based upon work supported by the National Science Foundation under Grant No. 2050883. and was conducted during the NSF's 2023 Research Experience for Undergraduate (REU) program at East Carolina University, with a focus on Software Engineering and Data Science. 
 
 ## Abstract
@@ -23,24 +22,19 @@ According to our results, the model did not improve in labelling accuracy after 
 - Samory, Mattia (2021). The 'Call me sexist but' Dataset (CMSB). GESIS - Leibniz-Institute for the Social Sciences. Data File Version 1.0.0, https://doi.org/10.7802/2251.
 
 ## Information About Data Extraction
-Using python and YouTube's API, I will randomly extract comments from minority-lead superhero film trailers from YouTube and analyze biggotted comments within them. I will only be looking at movie trailers/movies that were released in the 21st century. These are the trailers that I will be pulling from: 
+I used [onlyphantom's YouTube API Python source code](https://github.com/srazam/youtube_api_python) to randomly extract comments from the trailers listed below: 
 
 #### Minority-Lead Superhero Films/Tv Shows
-* Spider-Man: Into the Spiderverse
-* Captain Marvel
 * Ms. Marvel
-* Black Panther
-* Black Panther: Wakanda Forever
-* Shang-Chi and the Legend of the Ten Rings
+* Wonder Woman
 * Black Adam
+* Black Panther
+* Captain Marvel
+* Shang Chi
 
 #### Non-Minority Lead Films/TV Shows
-* Thor
-* Captain America
-* Iron Man
-* Loki
-
-#### Team-Lead Films
-* Guardians of the Galaxy Films
-* Peacemaker 
-* Suicide Squad (by James Gunn)
+ * Pennyworth
+ * Captain America: Winder Soldier
+ * Ant Man
+ * Doctor Strange
+ * Shazam
