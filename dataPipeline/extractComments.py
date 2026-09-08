@@ -6,7 +6,7 @@ import csv
 from googleapiclient.discovery import build
 from pathlib import Path
 
-api_key = 'AIzaSyDGH2Sddkb-KLDSWErXWEVCJzx4d42EfTU'
+api_key = 'YOUR_API_KEY'
 video_ids = ['LIST OF VIDEO IDs HERE']                                      
 file_names = ['FILENAMEHERE.csv', 'SECONDFILENAMEHERE.csv', ...] 
 
