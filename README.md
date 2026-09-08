@@ -43,3 +43,11 @@ I used [onlyphantom's YouTube API Python source code](https://github.com/srazam/
  * Ant Man
  * Doctor Strange
  * Shazam
+
+## How to Run
+Activate the virtual environment using the following command:
+`.venv\Scripts\activate`
+
+`detectHS.py` - runs initial evaluation on data in `rawData` to predict if comments are hateful or not and saves it in `\modelResults`
+`\finetuning` - contains data and file used to fine-tune BERT model
+`fintunedEval.py` - runs the finetuned model on data in `modelResults` and saves new label in `finalEval`
