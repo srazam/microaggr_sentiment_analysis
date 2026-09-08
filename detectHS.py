@@ -1,18 +1,22 @@
-from transformers import pipeline #Used for applying pre-trained model without tokenizing text
+'''
+    Performing initial labeling on data before finetuning BERT model
+'''
+
+from transformers import pipeline 
 import pandas as pd 
 
 model_name = "Hate-speech-CNERG/dehatebert-mono-english"
 nlp = pipeline("text-classification", model=model_name)
 
-input_file = r"C:\Users\AzamF\Desktop\trailerData\WakandaForever_6-27.csv"  
-output_file = r"C:\Users\AzamF\Documents\GitHub\reuData\modelResults\labeled_WakandaForever.csv"  
+input_file = "rawData\FILENAMEHERE.csv"  
+output_file = "modelResults\FILENAMEHERE.csv"  
 
-max_sequence_length = 512
+max_sequence_length = 512 #Randomly chosen
 
 df = pd.read_csv(input_file)
 texts = df["Comment Text"]  
 
-#Truncate the text sequences to the maximum length
+#Truncate text sequences to maximum length 
 truncated_texts = [text[:max_sequence_length] for text in texts]
 results = nlp(truncated_texts)
 
