@@ -1,5 +1,5 @@
 # Detecting Microaggressions and Subtle Hate Speech in Social Media Data Using BERT 
-### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Films 
+### Performing Sentiment Analysis on YouTube Comments under Minority-Lead Superhero Media Trailers 
 
 ## Acknowledgements and Notes
 This research is based upon work supported by the National Science Foundation under Grant No. 2050883 and was conducted during the NSF's 2023 Research Experience for Undergraduate (REU) program at East Carolina University, with a focus on Software Engineering and Data Science. The following information below was from the poster presented at the Summer 2023 Undergraduate Research Symposium at East Carolina University.
@@ -47,7 +47,7 @@ I used [onlyphantom's YouTube API Python source code](https://github.com/srazam/
 ## How to Run
 Activate the virtual environment using the following command:
 `.venv\Scripts\activate`
-
-`detectHS.py` - runs initial evaluation on data in `rawData` to predict if comments are hateful or not and saves it in `\modelResults`
-`\finetuning` - contains data and file used to fine-tune BERT model
-`fintunedEval.py` - runs the finetuned model on data in `modelResults` and saves new label in `finalEval`
+You can then run the following files and see data in the folders below:
+* `detectHS.py` - runs initial evaluation on data in `rawData` to predict if comments are hateful or not and saves it in `\modelResults`
+* `\finetuning` - contains data and file used to fine-tune BERT model
+* `fintunedEval.py` - runs the finetuned model on data in `modelResults` and saves new label in `finalEval`
